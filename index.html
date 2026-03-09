@@ -1,18 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Redirecting...</title>
+<meta charset="UTF-8">
+<title>Opening WhatsApp...</title>
 
-    <!-- Instant Redirect -->
-    <meta http-equiv="refresh" content="0; url=https://api.whatsapp.com/send/?phone=%2B918072450722&text=Hi%2C%20How%20are%20you%20-%20Got%20the%20number%20from%20your%20card&type=phone_number&app_absent=0">
+<script>
+const phone = "918072450722";
+const message = "Hi, I got your number from your visiting card.";
 
-    <script>
-        // Fallback redirect (recommended)
-        window.location.replace("https://api.whatsapp.com/send/?phone=%2B918072450722&text=Hi%2C%20How%20are%20you%20-%20Got%20the%20number%20from%20your%20card&type=phone_number&app_absent=0");
-    </script>
+const encodedMessage = encodeURIComponent(message);
+
+const whatsappApp = `whatsapp://send?phone=${phone}&text=${encodedMessage}`;
+const whatsappWeb = `https://wa.me/${phone}?text=${encodedMessage}`;
+
+function openWhatsApp() {
+  const start = Date.now();
+
+  window.location.href = whatsappApp;
+
+  setTimeout(function() {
+    if (Date.now() - start < 2000) {
+      window.location.href = whatsappWeb;
+    }
+  }, 1500);
+}
+
+window.onload = openWhatsApp;
+</script>
+
+<style>
+body{
+  font-family: system-ui;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  background:#f5f5f5;
+}
+</style>
 </head>
+
 <body>
-    <p>Redirecting to WhatsApp...</p>
+Opening WhatsApp chat...
 </body>
 </html>
